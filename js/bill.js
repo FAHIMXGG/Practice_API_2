@@ -1,14 +1,14 @@
 const forbesData = async () => {
     const url = `./js/api.js`
     const res = await fetch(url);
-    const data = await res.json();
-    displayData(data);
+    const infos = await res.json();
+    displayData(infos);
 }
 
-const displayData = data => {
-    console.log(data)
+const displayData = infos => {
+    console.log(infos)
     const table = document.getElementById('table')
-    data.forEach( () =>{
+    infos.forEach( (info) =>{
     const tableDiv = document.createElement('tr');
     tableDiv.classList.add('bg-white')
     tableDiv.classList.add('border-b')
@@ -17,18 +17,21 @@ const displayData = data => {
     tableDiv.innerHTML = `
     <th scope="row"
                                     class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                                    ${data.city} 
+                                    ${info.personName} <button onclick = "loadMealDetail(${info.naturalId
+                                    })" data-modal-target="defaultModal" data-modal-toggle="defaultModal" class="" type="button">
+                                    Toggle modal
+                                  </button>
                                 </th>
                                 <td class="px-6 py-4">
-                                    ${data.rank}
+                                    ${info.rank}
                                 </td>
                                 <td class="px-6 py-4">
-                                    Laptop
+                                    ${info.industries[0]}
                                 </td>
-                                <td class="px-6 py-4">
-                                    $2999
+                                <td  class="px-6 py-4">
+                                    ${info.archivedWorth}
                                 </td>
-    
+                                
     `;
     table.appendChild(tableDiv);
    })
@@ -36,8 +39,22 @@ const displayData = data => {
 
 
 
-
-
+const loadMealDetail = phone =>{
+    console.log(phone);
+    // const modalTitle = document.getElementById('phoneDetailModalLabel');
+    // modalTitle.innerText = phone.name;
+    // const phoneDetails= document.getElementById('phone-details');
+    // phoneDetails.innerHTML = `
+    // <img src="${phone.image
+    // }" alt="">
+    // <p> Release Date: ${phone.releaseDate ? phone.releaseDate : 'No Release Date'}</p>
+    // <p>Storage: ${phone.mainFeatures.storage} </p>
+    // <p>chipSet: ${phone.mainFeatures.chipSet}</p>
+    // <p>displaySize: ${phone.mainFeatures.displaySize}</p>
+    // <p></p>
+    // <p> others: ${phone.others ? phone.others.Bluetooth : 'none'}</p>
+    // `
+  }
 
 
 
